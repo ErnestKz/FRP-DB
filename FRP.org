@@ -1,0 +1,45 @@
+module Reflex.TriggerEvent
+- Defines TriggerEvent
+  - Describes actions that may create new Events that can be triggered from IO
+
+module Reflex.Time
+module Reflex.Spider
+module Reflex.Requester
+- Defines Requester
+  - Indicates that an action can make requests and receive responses to them.
+  - Typically used for things like WebSocket, where it is desirable to collect many potential
+    sources of events and send them over a single channel.
+    - Then distribute the results back out efficiently to their original request sites.
+
+module Reflex.Query
+- Query can be thougth of as a declaration of interest in some set of data.
+  - A QueryResult is the set of data associated with that interest set.
+- crop function provides a way to determine what part of a given QueryResult is relevant to a given Query.
+
+module Reflex.Profiled
+module Reflex.PostBuild
+- PostBuild represents an action that is notified via an Event when it has finished executing
+  - Definition of "finished" is determined by the instance of PostBuild.
+  - Intent is to allow Behaviours and Dynamics to be safely sampled
+    - regardless of where they were created
+      - when the post-build Event fires
+  - the post-build Event will fire exactly once for a given action
+
+module Reflex.PerformEvent
+- Defines PerformEvent and TriggerEvent, which mediate the interaction between
+  Reflex-based program and the external side-effcting actions such as IO
+
+module Reflex.NotReady
+module Reflex.DynamicWriter
+module Reflex.Dynamic
+module Reflex.EventWriter
+module Reflex.Collection
+module Reflex.BehaviourWriter
+module Reflex.Adjustable
+
+module Reflex.Class
+Reflex class contians all the primitve functionality needed for FRPdb
+The t type parameter indicates which "timeline" is in use.
+Timelines are fully-indpendent FRP contexts.
+The type of the timeline determines the FRP engine to be used.
+For most purposes the Spider implementation is recommended

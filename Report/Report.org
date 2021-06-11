@@ -1,0 +1,64 @@
+* Using Abstract Data Types and Functional Reactive Programming as a declarative description of data models and interactions between data stores and message queues.
+
+As of today the solutions for interfacing with different data stores and message queues is a fragmented ordeal which requires knowledge of the way the data is modelled and the protocols for each data format.
+* Overall Vision
+There are three main steps to the system.
+  
+1. Using Functional Reactive Programming and Abstract Data Types declare how the sources of data will be combined and used.
+2. Compile the declaration into a description of what the data is and the relations are between the data, and how they relate, i.e how the data is computed from its dependencies.
+3. The description will be interpreted by an engine that determines what the most effecient/suitable data stores/formats, message queues, and how many infrastructure nodes will be needed to run the system, and how the system will be executed.
+
+In this report we will focus on the first part of the system.
+* Main Goal
+The main goal of this investigation is to see if a fully FRP based abastraction is suitable for this use case.
+A succesful abstraction would mean that it provides a means to acomplish what is needed while being clear, maintainable, composable, and overall ergonomic for the user of the abstraction.
+
+* How Achieved
+The abstraction will be tried out on a range use cases.
+
+
+User Sign Up and optionally fill out a form
+User Login
+User can submit a form later on
+User can view their bio, and it shows their favorite stats
+User can view other bio
+User See Their Page with Stats
+- Raw stats
+- Aggregations
+- Leaderboards
+User clicks buttons on two different pages
+
+One team for each page, and each team does their own version of data analysis
+
+Another team manages an in-house stats dashboard that shows the meta data of the website
+
+
+
+* Literature
+** ADT in databases
+Erik Meijer
+https://queue.acm.org/detail.cfm?id=1961297
+https://maartenfokkinga.github.io/utwente/mmf2011p.pdf
+
+Erik Meijer says he has paper on the differen types of data
+https://www.infoq.com/interviews/meijer-big-data/
+
+Erik Meijer & Rich Hickey
+https://channel9.msdn.com/posts/Expert-to-Expert-Erik-Meijer-and-Rich-Hickey-Clojure-and-Datomic
+
+Existing function and reactive domain modelling
+https://www.manning.com/books/functional-and-reactive-domain-modeling#toc
+
+
+   
+https://dl.acm.org/doi/abs/10.1145/800227.806912
+https://link.springer.com/article/10.1007%2Fs007780050059
+** Types of Databases
+Database Internals by Alex Petrov
+** Types of data processisng constructs (message queues)
+** Functional Reactive Programming   
+* Topics to read up on
+Message queues
+
+* Useful links  
+Sci-Hub   
