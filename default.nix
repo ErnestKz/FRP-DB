@@ -6,6 +6,7 @@
 , niv
 , time
 , random
+, cabal-install
 }:
 
 mkDerivation {
@@ -21,6 +22,7 @@ mkDerivation {
     random
   ];
   buildTools = [
+    cabal-install
     haskell-language-server
     niv
   ];
