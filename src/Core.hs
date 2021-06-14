@@ -12,6 +12,10 @@ import           Control.Monad
 import           Control.Monad.IO.Class (MonadIO, liftIO)
 import           Data.List
 
+
+import           BlueTeam               (createUserEvents)
+
+
 type Users = [User]
 data User = User UserName Bio Stats
 type UserName = String
@@ -34,7 +38,9 @@ app = runHeadlessApp $ do
   (eExit, aExit) <- newTriggerEvent
 
   eClicks <- createEventStream
+  eBlueClicks <- createUserEvents
   performEvent $ fmap (liftIO . print) eClicks
+  performEvent $ fmap (liftIO . print) eBlueClicks
 
 
 
@@ -64,6 +70,7 @@ fireEvents :: (ClickEvent -> IO ()) -> IO ()
 fireEvents trigger = forever $ do
     clickEvent <- newClickEvent'
     trigger clickEvent
+    threadDelay 1000000
 
 newClickEvent' :: IO ClickEvent
 newClickEvent' = fmap newClickEventRed getCurrentTime
