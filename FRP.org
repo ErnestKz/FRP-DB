@@ -43,3 +43,9 @@ The t type parameter indicates which "timeline" is in use.
 Timelines are fully-indpendent FRP contexts.
 The type of the timeline determines the FRP engine to be used.
 For most purposes the Spider implementation is recommended
+
+
+
+
+** Subset ADTs and creating joins from an 'incomplete' ADT to the 'full' ADT in order to create a new behaviour
+
