@@ -1,23 +1,11 @@
-module BlueTeam (createUserEvents) where
+module BlueTeam  where
 
-import           Control.Concurrent
-import           Control.Monad
-import           Control.Monad.IO.Class
-import           Reflex
-
-data ButtonClick = ButtonClick UserName ButtonId
+data ButtonClick = ButtonClick User ButtonId
   deriving Show
-type UserName = String
-type ButtonId = Integer
 
+newtype User = User String
+  deriving Show
 
-createUserEvents :: (MonadIO m, TriggerEvent t m) => m (Event t ButtonClick)
-createUserEvents = do
-  (events, eventTrigger) <- newTriggerEvent
-  liftIO $ forkIO $ fireEvents eventTrigger
-  return events
+newtype ButtonId = ButtonId Integer
+  deriving Show
 
-fireEvents :: (ButtonClick -> IO ()) -> IO ()
-fireEvents trigger = forever $ do
-    trigger $ ButtonClick "Bob" 1
-    threadDelay 100000

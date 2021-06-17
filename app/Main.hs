@@ -1,7 +1,7 @@
 module Main where
 
-import           Core
+import           Core2
 
-main = core
+main = core2
 
 

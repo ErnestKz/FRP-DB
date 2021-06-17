@@ -6,7 +6,6 @@ import           System.Random
 import           Reflex
 import           Reflex.Host.Headless   (runHeadlessApp)
 
-
 import           Control.Concurrent
 import           Control.Monad
 import           Control.Monad.IO.Class (MonadIO, liftIO)
@@ -14,7 +13,6 @@ import           Data.List
 
 
 import           BlueTeam               (createUserEvents)
-
 
 type Users = [User]
 data User = User UserName Bio Stats

@@ -2,7 +2,6 @@
 , stdenv
 , base
 , haskell-language-server
-, reflex
 , niv
 , time
 , random
@@ -18,7 +17,6 @@ mkDerivation {
   isExecutable = true;
   executableHaskellDepends = [
     base
-    reflex
     time
     random
     reactive-banana
