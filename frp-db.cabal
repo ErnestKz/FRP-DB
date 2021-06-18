@@ -5,7 +5,7 @@ cabal-version:       >= 1.8
 
 library
   hs-source-dirs:      src
-  exposed-modules:     Core2
+  exposed-modules:     Core
   build-depends:       base >=4.0 && <5
                      , time
                      , random
