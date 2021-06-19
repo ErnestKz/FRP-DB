@@ -101,13 +101,18 @@ The network will register its
 
 #+end_src
 Use fromAddHandler to obtain input events.
-This library uses this to register event handlers with the event-based network.
+This library uses this to register event handlers with the event-based framework.
 
 Use reactimate to animate output events.
 Perhaphs in other words, use reactimate in order to do IO ouput on events.
+
 Use compile to put everything together in an EventNetwork
   - and use actuate to start handling events
 
 #+begin_src haskell
 compile :: MomentIO () -> IO EventNetwork
 #+end_src    
+Compile the description of the newtork into an EventNetwork that can be actuated, paused and so
+on
+
+The MomentIO monad builds up the description for it to be eventually compiled into an EventNetwork

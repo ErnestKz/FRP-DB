@@ -20,10 +20,22 @@ core = do
   forever $ threadDelay 1000000
 
 
+
+
+core2 :: MomentIO ()
+core2 = do
+    (eventStream, eventTrigger) <- newEvent
+    reactimate $ fmap putStrLn eventStream
+    liftIO $ forkIO $ threadDelay 10000 >> eventTrigger "Hello!"
+    void $ liftIO $ forkIO $ threadDelay 10000 >> eventTrigger "World!"
+    -- liftIO $ threadDelay 1000000
+
+
+
 createEventStream :: MomentIO (Event String)
 createEventStream = do
     (eventStream, eventTrigger) <- liftIO newAddHandler
-    liftIO $ forkIO $ eventGenerator eventTrigger
+    liftIO $ forkIO $ eventGenerator eventTrigger  -- should probably fork these after the network has actuated
     fromAddHandler eventStream
 
 eventGenerator :: (String -> IO a) -> IO ()

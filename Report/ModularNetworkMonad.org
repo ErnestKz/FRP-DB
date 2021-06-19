@@ -6,8 +6,8 @@ them to declare their own reactive stream.
 A stream is created by generating two values, the event stream itself, and a trigger for the event stream.
 #+begin_src haskell
 do
-    (eventStream, eventTrigger) <- newAddHandler
-    register eventStream putStrLn
+    (eventStream, eventTrigger) <- newEvent
+    reactimate $ fmap putStrLn eventStream 
     eventTrigger "Hello!"
 #+end_src
 
