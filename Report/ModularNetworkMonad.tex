@@ -1,0 +1,43 @@
+% Created 2021-06-18 Fri 20:03
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\date{\today}
+\title{}
+\hypersetup{
+ pdfauthor={},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.2 (Org mode 9.4.4)}, 
+ pdflang={English}}
+\begin{document}
+
+\tableofcontents
+
+\section{Modularising Reactive Stream Declarations}
+\label{sec:org16778ed}
+
+It is desireable for the programmer to be able import a reactive stream from different modules and use
+them to declare their own reactive stream.
+
+A stream is created by generating two values, the event stream itself, and a trigger for the event stream.
+\begin{verbatim}
+do
+    (eventStream, eventTrigger) <- newAddHandler
+    register eventStream putStrLn
+    eventTrigger "Hello!"
+\end{verbatim}
+\end{document}

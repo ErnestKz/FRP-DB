@@ -1,0 +1,20 @@
+* Modularising Reactive Stream Declarations
+
+It is desireable for the programmer to be able import a reactive stream from different modules and use
+them to declare their own reactive stream.
+
+A stream is created by generating two values, the event stream itself, and a trigger for the event stream.
+#+begin_src haskell
+do
+    (eventStream, eventTrigger) <- newAddHandler
+    register eventStream putStrLn
+    eventTrigger "Hello!"
+#+end_src
+
+If we put this in a function we get
+
+#+begin_src haskell
+createEventStream :: 
+
+
+#+end_src

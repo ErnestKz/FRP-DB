@@ -23,5 +23,5 @@ newtype BluePage = BluePage Integer
 
 
 -- every time either event occurs, the behaviour will be updated with the count
-pageEventCount :: Behavior UserStats
-pageEventCount = undefined
+-- pageEventCount :: Behavior UserStats
+-- pageEventCount =

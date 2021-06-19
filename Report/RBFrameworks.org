@@ -1,0 +1,113 @@
+* Connect to the outside world by building
+EventFrameworks
+and running them
+
+
+#+begin_src haskell
+data EventNetwork
+#+end_src
+Data type that represents a compiled event network.
+May be paused or already running.
+#+begin_src haskell
+actuate :: EventNetwork -> IO ()
+#+end_src
+Actuate an event network.
+The inputs will register their event handlers
+  - So that the networks starts to produce outputs in response to input events.
+#+begin_src haskell
+pause :: EventNetwork -> IO ()
+#+end_src
+Pause an event newtwork.
+Immediately stop producing output.
+
+#+begin_src haskell
+interpretAsHandler :: (Event a -> Moment (Event b)) -> AddHandler a -> AddHandler b
+#+end_src
+Simple way to write a single event handler
+
+#+begin_src haskell
+data Moment a
+#+end_src
+The Moment monad denotes a pure computation that happens at one particular moment in time.
+Semantically, it is a reader monad
+#+begin_src haskell
+type Moment a = Time -> a
+#+end_src
+When run, the argument tells the time at which the computation happens.
+
+What time means here is the time as it relates to Events and Behaviours
+Use the fiction that every calculation within the Moment monad takes zero logical time to perform.
+
+The instances that exist for Moment are:
+Monad Moment
+Functor Moment
+MonadFix Moment
+Applicative Moment
+MonadMoment Moment
+
+** Overview
+Framework Module allows to
+- obtain input events from external sources
+- perform output in reaction to events
+
+In contrast, the functions in the Combinators allow you to express the output events in
+terms of input events.
+
+This expression is called an event graph.
+
+An event network is an event graph together with inputs and outputs.
+To build an event network, describe
+- the inputs,
+- outputs and the
+- event graph
+in the MomentIO monad and
+ - use the compile function to obtain an event network from that.
+
+To activate an event network, use the activate function.
+The network will register its
+- input event handlers and
+- start producing output
+
+#+begin_src haskell
+  main = do
+    -- init gui framwerok
+    window <- newWindow
+  ...
+
+  -- describe the event network
+  let newtworkDescription :: MomentIO ()
+      networkDescription = do
+	  -- input: obtain Event from functions that register event handlers
+	  emouse <- fromAddHandler $ registerMouseEvent window
+	  ekeyboard <- fromAddHandler $ registerKeyEvent window
+	  -- input: obtain Behaviour from changes
+	  btext <- fromChanges "" $ registerTextChange editBox
+	  -- input obtain Behaviour from mutable data by polling
+	  bdie <- fromPoll $ randomRIO (1,6)
+
+	  -- express event graph
+	  behaviour <- accumB
+	  let
+	     ....
+	     event15 = union event13 event14
+	  -- output: animate some event occurances
+	  reactimate $ fmap print event15
+	  reactimate $ fmap drawCircle eventCircle
+  -- compile network description into a network
+  network <- compile networkDescription
+  -- register handlers and start producing outputs
+  actuate network
+
+
+#+end_src
+Use fromAddHandler to obtain input events.
+This library uses this to register event handlers with the event-based network.
+
+Use reactimate to animate output events.
+Perhaphs in other words, use reactimate in order to do IO ouput on events.
+Use compile to put everything together in an EventNetwork
+  - and use actuate to start handling events
+
+#+begin_src haskell
+compile :: MomentIO () -> IO EventNetwork
+#+end_src    

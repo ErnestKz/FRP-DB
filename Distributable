@@ -1,0 +1,21 @@
+This week work on distributing events to different modules in the system
+
+
+
+StreamDescirption data type
+
+
+Within the StreamDescription monad, the function that returns a StreamdDescription should
+just return a handle to the event stream
+
+In reality it is returning something that will be handed down by a caller
+
+
+In the function we describe how the envent streams are set up and we return the event setup computation
+as an IO action
+
+
+
+The functions that make event handlers, they just provide the logic where they come from or how they combine
+Therefore they do not dircectly create the event handlers and triggers themselves, they just
+use the event handlers and triggers that are provided
