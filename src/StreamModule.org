@@ -1,0 +1,15 @@
+Monad that hides away plumbing
+
+
+(e1, t1) <- newEvent
+(e2, t2) <- newEvent
+
+forkIO $ map get "BlueTeamButtonClickListener" t1
+forkIO $ map get "RedTeamButtonClickListener" t2
+
+b1 <- accumulateSums e1 e2
+
+
+
+
+Map EventStreamName (EventTriggerComputation, [])

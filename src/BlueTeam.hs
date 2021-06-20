@@ -19,7 +19,7 @@ newtype ButtonId = ButtonId Integer
 getUserString :: ButtonClick -> String
 getUserString (ButtonClick (User userString) _) = userString
 
-buttonClickEvents events = undefined
+buttonClickEvents = undefined
 
 eventGenerator :: EventGenerator ButtonClick
 eventGenerator = EventGenerator
