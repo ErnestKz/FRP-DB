@@ -7,6 +7,7 @@
 , random
 , cabal-install
 , reactive-banana
+, containers
 }:
 
 mkDerivation {
@@ -20,6 +21,7 @@ mkDerivation {
     time
     random
     reactive-banana
+    containers
   ];
   buildTools = [
     cabal-install
