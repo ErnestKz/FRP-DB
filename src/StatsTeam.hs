@@ -19,7 +19,6 @@ newtype RedPage = RedPage Integer
 newtype BluePage = BluePage Integer
   deriving Show
 
-
 initialStats :: UserStats
 initialStats = Map.empty
 
@@ -43,41 +42,37 @@ accumulateSums blueEvents redEvents =
     blueClickStat = blueButtonToStat <$> blueEvents
     redClickStat = redButtonToStat <$> redEvents
 
+----------------------------------------------------
 
-data TotalPageClicks = TotalPageClicks RedPage BluePage
+data PageClicks = PageClicks RedPage BluePage
 
-totalPageClicks :: Behavior UserStats -> Behavior TotalPageClicks
+totalPageClicks :: Behavior UserStats -> Behavior PageClicks
 totalPageClicks userStatsBehavior = Map.foldr sumPageClicks zeroPageClicks <$> userStatsBehavior
   where
-    zeroPageClicks = TotalPageClicks (RedPage 0) (BluePage 0)
-    sumPageClicks :: UserPageClicks -> TotalPageClicks -> TotalPageClicks
+    zeroPageClicks = PageClicks (RedPage 0) (BluePage 0)
+    sumPageClicks :: UserPageClicks -> PageClicks -> PageClicks
     sumPageClicks
       (UserPageClicks (RedPage ru) (BluePage bu))
-      (TotalPageClicks (RedPage rt) (BluePage bt)) =
-      TotalPageClicks (RedPage (rt + ru)) (BluePage (bu + bt))
+      (PageClicks (RedPage rt) (BluePage bt)) =
+      PageClicks (RedPage (rt + ru)) (BluePage (bu + bt))
 
+----------------------------------------------------
 
 data UserNthClick = UserNthClick User Integer
 
-nthClickBetweenRedAndBlue :: Behavior TotalPageClicks -> Event B.ButtonClick -> Event R.ButtonClick -> Event UserNthClick
-nthClickBetweenRedAndBlue = undefined
+getUserNth :: UserNthClick -> Integer
+getUserNth (UserNthClick _ n) = n
 
+getUserName :: UserNthClick -> String
+getUserName (UserNthClick u _) = u
 
+nthClickBetweenRedAndBlue :: Behavior PageClicks -> Event B.ButtonClick -> Event R.ButtonClick -> Event UserNthClick
+nthClickBetweenRedAndBlue pageClicks blueButton redButton = apply (sampleClicksForUser <$> totalPageClicks) userClicks
+  where
+    totalPageClicks :: Behavior Integer
+    totalPageClicks = (\ (PageClicks (RedPage r) (BluePage b)) -> b + r) <$> pageClicks
 
+    userClicks :: Event String
+    userClicks = unionWith const (B.getUserString <$> blueButton) (R.getUserString <$> redButton)
 
-
--- accumulateSums2 :: (MonadMoment m) => m (Behavior UserStats)
--- accumulateSums2 = do
---   blueEvents <- B.buttonClickEvents
---   redEvents <- R.buttonClickEvents
---   let
---     blueClickStat = blueButtonToStat <$> blueEvents
---     redClickStat = redButtonToStat <$> redEvents
---     statEvents = unionWith sumStats blueClickStat redClickStat
---   accumB initialStats $ fmap sumStats statEvents
-
-
-
--- every time either event occurs, the behaviour will be updated with the count
--- pageEventCount :: Behavior UserStats
--- pageEventCount =
+    sampleClicksForUser totalClicks userName = UserNthClick userName totalClicks

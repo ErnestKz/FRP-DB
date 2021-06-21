@@ -9,6 +9,7 @@ library
                      , StatsTeam
                      , BlueTeam
                      , RedTeam
+                     , PrizeTeam
                      
   build-depends:       base >=4.0 && <5
                      , time
