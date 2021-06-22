@@ -10,8 +10,10 @@ import           StatsTeam                   (User, UserNthClick, getUserName,
                                               nthClickBetweenRedAndBlue)
 
 data PrizeWinner = PrizeWinner User PrizeSize
+  deriving Show
+
 data PrizeSize = Big | Medium | Small
-  deriving (Eq, Ord)
+  deriving (Eq, Ord, Show)
 
 type PrizesTaken = Map.Map PrizeSize User
 

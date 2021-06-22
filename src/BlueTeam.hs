@@ -5,7 +5,8 @@ import           Control.Event.Handler
 import           Control.Monad
 import           Reactive.Banana
 
-import           Core
+import           Routing
+
 
 data ButtonClick = ButtonClick User ButtonId
   deriving Show

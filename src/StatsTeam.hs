@@ -59,6 +59,7 @@ totalPageClicks userStatsBehavior = Map.foldr sumPageClicks zeroPageClicks <$> u
 ----------------------------------------------------
 
 data UserNthClick = UserNthClick User Integer
+  deriving Show
 
 getUserNth :: UserNthClick -> Integer
 getUserNth (UserNthClick _ n) = n
