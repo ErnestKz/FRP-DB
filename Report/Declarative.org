@@ -1,0 +1,51 @@
+* Describing Data Relationships in Haskell
+
+* Output Description of The Declared Data Relationships
+The description should describe the input sources of the data, the computations that are run on the input
+sources, and the outputs.
+
+The description should not stray far from the reactive abstraction of the original description in the programming language,
+in the sense that it should keep fully concurrent description in terms of events and behaviours although perhaphs
+the abstract data types will be compiled away into a different representation. FRP seems like a very suitable way to
+describe a data relationship network even in a machine readable way.
+
+It will be important to keep the intermediarry description typed and pure in the sense that the computations that
+run do not produce any unexpected side effects. These pure guarantees will make it easier for the engine implementers
+to, shuffle around the computations, make optimizations, and create distributed solutions.
+
+The description will need to define the computations necessary to get to map one data stream into another.
+The details of the function will need to be expressed and will need to be interpreted by the engine to eventually execute.
+Perhaps the description can point to a compiled piece of code that can act as a function, and since the function will be
+pure with input types and output types, it will not disrupt the coordination of the network by the engine.
+
+A graph seems like a suitable way to model the computations and data source dependencies.
+
+The description should allow for re-arranging the computations and data flows of the declared streams into different
+streams so that engine implementers have the freedom of optimizing and have increased possibilites for making it distributed
+and behave within the restrictions.
+
+Combination of:
+Types
+Denotational Semantics
+FRP Semantics
+Graphs
+The description might include some basic functional/semantic building blocks for computations that the engine may implement.
+The descipriton may also provide a compiled binary for the engine to use.
+
+Will it preserve the ADT's?
+
+Could use SYB to serialise data types
+Perhaps use the Core as low level denotational semantics
+
+
+Denotations
+
+* Steps
+Define what is needed
+Search for existing abtractions/solution
+
+My hunch is that there do exist methods for formal data modelling e.g the relational model, but it describes it
+in a limited way and what is needed is an even more abstract and less restrictive model
+
+
+* Engine that Implements the Data Relationships  
